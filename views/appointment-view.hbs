@@ -1,0 +1,36 @@
+{{> header account=account}}
+{{> sidebar account=account}}
+
+
+<section class="teachers">
+
+   <h1 class="heading">my appointments</h1>
+
+   <div class="box-container">
+
+      {{!-- <div class="box offer">
+         <h3>become a tutor</h3>
+         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, itaque ipsam fuga ex et aliquam.</p>
+         <a href="register.html" class="inline-btn">get started</a>
+      </div> --}}
+
+      {{#each appointments}}
+      <div class="box">
+        <div class="tutor">
+          <div>
+            <h3>Tutor</h3>
+            <h3>{{this.first_name}} {{this.last_name}}</h3>
+            <h3>Date</h3>
+            <h3>{{this.date}}</h3>
+            <h3>Time</h3>
+            <h3>{{this.time_begin}} to {{this.time_end}}</h3>
+            <h3>Subject</h3>
+            <h3>{{this.subject_name}}</h3>
+          </div>
+        </div>
+        </div>
+        {{/each}}
+
+   </div>
+
+</section>

@@ -1,0 +1,29 @@
+{{> header account=account}}
+{{> sidebar account=account}}
+
+<section class="form-container">
+
+   <form action="/appointments/book" method="post" enctype="application/x-www-form-urlencoded">
+      <h3>register now with {{tutor.first_name}} {{tutor.last_name}}</h3>
+      <h3>Subject: {{subject.subject_name}}</h3>
+      {{!-- <input type="text" name="first_name" placeholder="enter your first name" required maxlength="50" class="box"> --}}
+      
+      {{!-- <input type="text" name="last_name" placeholder="enter your last name" required maxlength="50" class="box"> --}}
+
+      <p>Date: <span>*</span></p>
+      <input class = "box" type="date" name="appointment_date" min="2023-01-01" required>
+
+      <p>Working Hours: <span>{{this.window_start}} to {{this.window_end}}</span> </p>
+      
+      <p>Start Time: <span>*</span></p>
+      <input class="box" type="time" name="time_begin" required>
+      <p>End Time: <span>*</span></p>
+      <input class="box" type="time" name="time_end" required>
+      
+      <input type="hidden" name="tutor_id" value="{{tutor.tutor_id}}">
+      <input type="hidden" name="subject_id" value="{{subject.subject_id}}">
+      <input type="hidden" name="subject_name" value="{{subject.subject_name}}">
+      <input type="submit" value="Book" class="btn">
+   </form>
+
+</section>

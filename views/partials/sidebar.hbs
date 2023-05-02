@@ -1,0 +1,34 @@
+{{! Main Sidebar }}
+{{! variables: account, }}
+
+<div class="side-bar">
+
+  <div id="close-btn">
+    <i class="fas fa-times"></i>
+  </div>
+
+  <div class="profile">
+    {{#if account}}
+    <img src="/images/{{account.avatar}}" class="image" alt="">
+    <h3 class="name">{{account.first_name}} {{account.last_name}}</h3>
+    <p class="role">{{account.type}}</p>
+    <a href="/account" class="btn">view profile</a>
+    {{else}}
+    <img src="/images/default.jpg" class="image" alt="">
+    <h3 class="name"></h3>
+    <p class="role">Guest</p>
+    <a href="/login" class="option-btn">login</a>
+    {{/if}}
+  </div>
+
+  <nav class="navbar">
+    <a href="/"><i class="fas fa-home"></i><span>home</span></a>
+    <a href="/favorites"><i class="fa-solid fa-star"></i></i><span>favorites</span></a>
+    <a href="/appointments"><i class="fas fa-book-open"></i><span>appointments</span></a>
+    <a href="/about"><i class="fas fa-question"></i><span>about</span></a>
+    <a href="/courses"><i class="fas fa-graduation-cap"></i><span>courses</span></a>
+    <a href="/tutors"><i class="fas fa-chalkboard-user"></i><span>teachers</span></a>
+    <a href="/contact"><i class="fas fa-headset"></i><span>contact us</span></a>
+  </nav>
+  
+</div>

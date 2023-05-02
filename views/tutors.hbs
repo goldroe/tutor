@@ -1,0 +1,43 @@
+{{> header account=account}}
+{{> sidebar account=account}}
+
+<section class="teachers">
+
+   <h1 class="heading">expert teachers</h1>
+
+   <form class="search-tutor">
+      <input type="text" id="tutor_searchbar" onkeyup="search_tutors()" placeholder="Search for tutors..">
+      <button type="button" class="fas fa-search"></button>
+   </form>
+   
+
+   <div class="box-container">
+
+      {{!-- <div class="box offer">
+         <h3>become a tutor</h3>
+         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, itaque ipsam fuga ex et aliquam.</p>
+         <a href="register.html" class="inline-btn">get started</a>
+      </div> --}}
+
+      {{#each tutors}}
+         <div class="box">
+            <div class="tutor">
+               <img src="images/{{this.avatar}}" alt="">
+               <div>
+                  <h3>{{this.first_name}} {{this.last_name}}</h3>
+                  <span>developer</span>
+               </div>
+            </div>
+            <p>total playlists : <span>4</span></p>
+            <p>total videos : <span>18</span></p>
+            <p>total likes : <span>1208</span></p>
+            <form action="/tutors" method="POST">
+               <input type="hidden" name="tutor_id" value="{{this.account_id}}"/>
+               <input class="btn btn-outline-seconodary btn-small m-1" type="submit" value="View Details">
+            </form>
+         </div>
+      {{/each}}
+
+   </div>
+
+</section>

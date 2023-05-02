@@ -1,0 +1,60 @@
+{{> header account=account}}
+{{> sidebar account=account}}
+
+<section class="user-profile">
+
+   <h1 class="heading">your profile</h1>
+
+   <div class="info">
+
+      <div class="user">
+         <img src="images/{{account.avatar}}" alt="">
+         <h3>{{account.first_name}} {{account.last_name}}</h3>
+         <p>{{account.account_type}}</p>
+         <h3>About</h3>
+         <p>{{account.about_me}}</p>
+         {{!-- <form action="/account" method="POST"> --}}
+            {{!-- <input class="btn btn-outline-seconodary btn-small m-1" type="submit" value="Update Profile"> --}}
+         {{!-- </form> --}}
+      </div>
+   
+      <div class="box-container">
+   
+         <div class="box">
+            <div class="flex">
+               <i class="fas fa-bookmark"></i>
+               <div>
+                  <span>4</span>
+                  <p>saved playlist</p>
+               </div>
+            </div>
+            <a href="#" class="inline-btn">view playlists</a>
+         </div>
+   
+         <div class="box">
+            <div class="flex">
+               <i class="fas fa-heart"></i>
+               <div>
+                  <span>33</span>
+                  <p>videos liked</p>
+               </div>
+            </div>
+            <a href="#" class="inline-btn">view liked</a>
+         </div>
+   
+         <div class="box">
+            <div class="flex">
+               <i class="fa fa-clock-four"></i>
+               <div>
+                  <span>{{account.tutoring_hours}}</span>
+                  <p>Hours Completed</p>
+               </div>
+            </div>
+            <a href="#" class="inline-btn">view comments</a>
+         </div>
+   
+      </div>
+
+   </div>
+
+</section>

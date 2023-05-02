@@ -1,0 +1,10 @@
+Required features:
+
+▪ User signup: Register a new user to the system.
+    o Form validation: Check if all mandatory fields are filled out.
+    o Check if password is strong enough. Define the rules of having a
+      strong password. User passwords should be hashed and hashed
+      version of passwords should be stored in the database.
+
+- let students see avaialbility hours
+- check password match

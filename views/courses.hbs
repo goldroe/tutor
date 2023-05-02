@@ -1,0 +1,59 @@
+{{> header account=account}}
+{{> sidebar account=account}}
+
+<section class="courses">
+
+   <h1 class="heading">our courses</h1>
+
+   <form class="search-course">
+      <input type="text" id="course_searchbar" onkeyup="search_courses()" placeholder="Search for courses..">
+      <button type="button" class="fas fa-search"></button>
+   </form>
+
+   <div class="box-container">
+
+      {{#each courses}}
+      <div class="box">
+         <div class="tutor">
+            <img src="images/{{this.avatar}}" alt="">
+            <div class="info">
+               <h3>{{this.first_name}} {{this.last_name}}</h3>
+            </div>
+         </div>
+         {{!-- <div class="thumb">
+            <img src="images/thumb-1.png" alt="">
+            <span>10 videos</span>
+         </div> --}}
+         <h3 class="subject title">{{this.subject_name}}</h3>
+         <h4 class="title">{{this.subject_description}}</h4>
+         <form action="/courses" method="post">
+            <input type="hidden" name="subject_id" value="{{this.subject_id}}"/>
+            <input class="subject_name" type="hidden" name="subject_name" value="{{this.subject_name}}"/>
+            <input type="hidden" name="tutor_id" value="{{this.account_id}}"/>
+            <input type="hidden" name="first_name" value="{{this.first_name}}"/>
+            <input type="hidden" name="last_name" value="{{this.last_name}}"/>
+            <input type="hidden" name="avatar" value="{{this.avatar}}"/>
+            <input type="submit" value="Book Appointment" class="btn">
+         </form>
+      </div>      
+      {{/each}}
+
+      {{!-- <div class="box">
+         <div class="tutor">
+            <img src="images/pic-2.jpg" alt="">
+            <div class="info">
+               <h3>john deo</h3>
+               <span>21-10-2022</span>
+            </div>
+         </div>
+         <div class="thumb">
+            <img src="images/thumb-1.png" alt="">
+            <span>10 videos</span>
+         </div>
+         <h3 class="title">complete HTML tutorial</h3>
+         <a href="playlist.html" class="inline-btn">view playlist</a>
+      </div> --}}
+
+   </div>
+
+</section>
