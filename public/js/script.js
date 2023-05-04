@@ -31,13 +31,11 @@ let profile = document.querySelector('.header .flex .profile');
 
 document.querySelector('#user-btn').onclick = () =>{
     profile.classList.toggle('active');
-    search.classList.remove('active');
 }
 
 let search = document.querySelector('.header .flex .search-form');
 
 document.querySelector('#search-btn').onclick = () =>{
-    search.classList.toggle('active');
     profile.classList.remove('active');
 }
 
@@ -55,7 +53,6 @@ document.querySelector('#close-btn').onclick = () =>{
 
 window.onscroll = () =>{
     profile.classList.remove('active');
-    search.classList.remove('active');
     
     if(window.innerWidth < 1200){
         sideBar.classList.remove('active');
@@ -82,7 +79,6 @@ function search_tutors() {
 }
 
 function search_courses() {
-    console.log('search_courses');
     let input = document.getElementById('course_searchbar');
     let filter = input.value.toUpperCase();
     let courses = document.getElementsByClassName('box');

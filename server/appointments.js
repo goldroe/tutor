@@ -3,6 +3,22 @@ const router = express.Router();
 
 var connection = require('../services/database.js');
 
+function convertMilitaryToStandard (time) {
+    let timeParts = time.split(":");
+    let standardTime = "";
+  
+    if (parseInt(timeParts[0]) > 12) {
+      timeParts[0] = timeParts[0] - 12;
+      standardTime = timeParts.join(":") + " PM";
+    } else if (parseInt(timeParts[0]) === 12) {
+      standardTime = timeParts.join(":") + " PM";
+    } else {
+      standardTime = timeParts.join(":") + " AM";
+    }
+  
+    return standardTime;
+  }
+
 router.get('/', (req, res) => {
     const account = req.session.account;
 
@@ -21,7 +37,20 @@ router.get('/', (req, res) => {
 
     connection.query(sql, (err, rows) => {
         if (err) throw err;
-        console.log(rows);
+        // convert to standard (not military time)
+        rows.forEach(function (element, index) {
+            var start_split = rows[index].time_begin.split(":");
+            var end_split = rows[index].time_end.split(":");
+            let time_begin = start_split.slice(0, -1).join(':');
+            let time_end = end_split.slice(0, -1).join(':');
+
+            time_begin = convertMilitaryToStandard(time_begin);
+            time_end = convertMilitaryToStandard(time_end);
+
+            rows[index].time_begin = time_begin;
+            rows[index].time_end = time_end;
+        });
+
         res.render('appointment-view', {account: account, appointments: rows});
     });
 });
