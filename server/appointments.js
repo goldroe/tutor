@@ -66,7 +66,9 @@ router.post('/book', (req, res) => {
     WHERE account_id = ${req.body.tutor_id}`, (err, rows) => {
         if (err) throw err;
         var window = rows[0];
-        let fits_window = time_begin >= window.window_start && time_begin < window.window_end && time_end > window.window_start && time_end <= window.window_end;
+        let start = time_begin + ":00";
+        let end = time_end + ":00";
+        let fits_window = start >= window.window_start && start < window.window_end && end > window.window_start && end <= window.window_end;
 
         if (fits_window) {
             var date_conflict = false;

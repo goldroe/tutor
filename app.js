@@ -56,15 +56,18 @@ app.post('/login', upload.none(), (req, res) => {
     connection.query(`SELECT account_id, first_name, last_name, account_type, avatar, email, password FROM account WHERE email='${req.body.email}';`, (err, rows) => {
         if (err) throw err;
         var account = rows[0];
-
-        bcrypt.compare(req.body.pass, account.password, function(err, result) {
-            if (result == true) {
-                req.session.account = account;
-                res.redirect('/'); // go to home page
-            } else {
-                res.redirect('/login');
-            }
-        });
+        if (account && account.password) {
+            bcrypt.compare(req.body.pass, account.password, function(err, result) {
+                if (result == true) {
+                    req.session.account = account;
+                    res.redirect('/'); // go to home page
+                } else {
+                    res.redirect('/login');
+                }
+            });
+        } else {
+            res.redirect('/login');
+        }
     });
 });
 
