@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2023 at 09:34 PM
+-- Generation Time: May 06, 2023 at 02:54 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -54,11 +54,12 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`account_id`, `email`, `account_type`, `password`, `first_name`, `last_name`, `gender`, `phone_number`, `avatar`, `about_me`, `create_time`, `tutoring_minutes`, `country`, `state`, `city`, `street`, `province`, `postal_code`, `suite_number`) VALUES
-(2, 'johndoe@hotmail.com', 'tutor', 'pass123', 'John', 'Doe', 'M', '123-456-6789', 'pic-3.jpg', 'teacher1 description.', '2023-04-26 23:40:33', 155, 'USA', 'Texas', 'Dallas', '123 Street Road', NULL, '123456', NULL),
-(3, 'fnorris@outlook.com', 'tutor', 'password123', 'Faye', 'Norris', 'F', '123-123-4564', 'pic-7.jpg', 'teacher2 description.', '2023-04-27 02:20:16', 180, 'USA', 'Nebraska', 'Omaha', '298 Road Avenue', NULL, '45687', NULL),
-(11, 'tomblow@outlook.com', 'tutor', 'tom123', 'Tom', 'Blow', 'M', NULL, 'pic-9.jpg', 'This is Tom Blow. A professional Web Dev, teaching full stsack development.', '0000-00-00 00:00:00', 60, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(12, 'foobar@gmail.com', 'tutor', 'Foo@2001', 'foo', 'bar', 'M', NULL, 'pic-5.jpg', 'Sample foo bar', '0000-00-00 00:00:00', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(14, 'car190000@utdallas.edu', 'student', '$2b$10$07m.jFJKajNbDccq3CiO2e7pmdbnW3/rXuRKXgbzX5WtonmiL.SmW', 'Carlos', 'Rivera', 'M', NULL, 'pic-4.jpg', 'CS student at UTD', '0000-00-00 00:00:00', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(14, 'car190000@utdallas.edu', 'student', '$2b$10$07m.jFJKajNbDccq3CiO2e7pmdbnW3/rXuRKXgbzX5WtonmiL.SmW', 'Carlos', 'Rivera', 'M', NULL, 'pic-4.jpg', 'CS student at UTD', '0000-00-00 00:00:00', 240, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(16, 'janedoe@hotmail.com', 'tutor', '$2b$10$VgiEXeQ6PXfSMpqDhw/6O.FC4UpFFsbHWS0VV0D93RLVmTaqokdsa', 'Jane', 'Doe', 'M', NULL, 'pic-5.jpg', 'teacher about me', '0000-00-00 00:00:00', 180, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(17, 'johndoe@hotmail.com', 'tutor', '$2b$10$/jeunZxndzLnL606KTN11OnHLfpUGjdmYW.pZA3CmzaaoUO0cGEdS', 'John', 'Doe', 'M', NULL, 'pic-1.jpg', 'This is John Doe. I teach for fun!', '0000-00-00 00:00:00', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(18, 'oscarshelton@utdallas.edu', 'tutor', '$2b$10$731oZrE6YjF6q0PC0P.LaODcAaV6jKFfbigy5dMWe4sEnHE4uvUii', 'Oscar', 'Shelton', 'M', NULL, 'pic-9.jpg', 'This is Oscar Shelton! I teach students topics surrounding full-stack development!', '0000-00-00 00:00:00', 120, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(28, 'carlos@email.org', 'student', '$2b$10$Kl1CqbnECCJm0hJoX/PpCuki99jBBbB9VQD4ZON72QkRiHX.fYwFi', 'Carlos', 'Rivera', 'M', NULL, 'pic-1.jpg', 'This is me!', '0000-00-00 00:00:00', 60, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(29, 'tom@email.org', 'tutor', '$2b$10$sNiXRiOYoOD1xHTsc34vGOp/3w8Z485CK.3Tilq0JaNuFZDcPr9/O', 'Tom', 'Hill', 'M', NULL, 'pic-9.jpg', 'About me!', '0000-00-00 00:00:00', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -74,6 +75,15 @@ CREATE TABLE `appointment` (
   `time_begin` datetime NOT NULL,
   `time_end` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `appointment`
+--
+
+INSERT INTO `appointment` (`appointment_id`, `subject_id`, `student_id`, `tutor_id`, `time_begin`, `time_end`) VALUES
+(14, 5, 14, 16, '2023-05-01 12:00:00', '2023-05-01 13:00:00'),
+(16, 4, 14, 18, '2023-05-01 08:00:00', '2023-05-01 10:00:00'),
+(18, 5, 28, 16, '2023-05-31 12:00:00', '2023-05-31 13:00:00');
 
 -- --------------------------------------------------------
 
@@ -93,9 +103,10 @@ CREATE TABLE `availabilities` (
 --
 
 INSERT INTO `availabilities` (`availabilities_id`, `account_id`, `window_start`, `window_end`) VALUES
-(1, 2, '16:00:00', '18:30:00'),
-(2, 3, '15:00:00', '18:00:00'),
-(3, 11, '12:00:00', '14:00:00');
+(4, 16, '12:00:00', '13:00:00'),
+(5, 17, '17:00:00', '18:00:00'),
+(6, 18, '08:00:00', '10:00:00'),
+(9, 29, '20:00:00', '22:00:00');
 
 -- --------------------------------------------------------
 
@@ -115,11 +126,10 @@ CREATE TABLE `favorite_list` (
 --
 
 INSERT INTO `favorite_list` (`favorite_list_id`, `student_id`, `tutor_id`, `on_subject_id`) VALUES
-(19, 14, 3, 5),
-(20, 14, 11, 1),
-(21, 14, 2, 6),
-(22, 14, 2, 8),
-(23, 14, 11, 3);
+(27, 14, 16, 5),
+(28, 14, 17, 4),
+(29, 14, 18, 3),
+(31, 14, 17, 6);
 
 -- --------------------------------------------------------
 
@@ -138,13 +148,13 @@ CREATE TABLE `subject` (
 --
 
 INSERT INTO `subject` (`subject_id`, `subject_name`, `subject_description`) VALUES
-(1, 'HTML', 'Introduction to HTML'),
-(2, 'CSS', 'Introduction to CSS'),
-(3, 'Javascript', 'Introduction to Javascript'),
-(4, 'React', 'Introduction to React'),
+(1, 'HTML', 'Introduction to HTML for front-end development'),
+(2, 'CSS', 'Introduction to CSS for front-end development'),
+(3, 'Javascript', 'Introduction to Javascript for front-end development'),
+(4, 'React', 'Introduction to React for front-end development'),
 (5, 'Calculus', 'Calculus is the mathematical study of change.'),
-(6, 'Algebra', 'Algebra is one of the main branches of mathematics, covering the study of structure, relation and quantity. '),
-(7, 'English Literature', 'English literature is literature written in the English language from the United Kingdom, the Republic of Ireland, and the United States.'),
+(6, 'Algebra', 'Algebra is a branch of mathematics, study of structure, relation and quantity. '),
+(7, 'English Literature', 'English literature is literature written in the English language from the United Kingdom, and the United States.'),
 (8, 'Chemistry', 'Chemistry is the scientific study of the properties and behavior of matter.');
 
 -- --------------------------------------------------------
@@ -164,16 +174,21 @@ CREATE TABLE `subject_list` (
 --
 
 INSERT INTO `subject_list` (`subject_list_id`, `account_id`, `subject_id`) VALUES
-(1, 2, 1),
-(2, 3, 2),
-(3, 2, 6),
-(4, 2, 8),
-(5, 3, 5),
-(6, 3, 4),
-(10, 11, 1),
-(11, 11, 2),
-(12, 11, 3),
-(13, 11, 4);
+(14, 16, 5),
+(15, 16, 6),
+(16, 16, 7),
+(17, 16, 8),
+(18, 17, 3),
+(19, 17, 4),
+(20, 17, 6),
+(21, 18, 1),
+(22, 18, 2),
+(23, 18, 3),
+(24, 18, 4),
+(30, 29, 5),
+(31, 29, 6),
+(32, 29, 7),
+(33, 29, 8);
 
 --
 -- Indexes for dumped tables
@@ -233,25 +248,25 @@ ALTER TABLE `subject_list`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `appointment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `appointment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `availabilities`
 --
 ALTER TABLE `availabilities`
-  MODIFY `availabilities_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `availabilities_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `favorite_list`
 --
 ALTER TABLE `favorite_list`
-  MODIFY `favorite_list_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `favorite_list_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `subject`
@@ -263,7 +278,7 @@ ALTER TABLE `subject`
 -- AUTO_INCREMENT for table `subject_list`
 --
 ALTER TABLE `subject_list`
-  MODIFY `subject_list_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `subject_list_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- Constraints for dumped tables
