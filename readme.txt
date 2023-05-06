@@ -1,13 +1,15 @@
 Run 'npm install' while in the main directory to install the dependencies.
 
-Import tutor.sql into a mysql client like Xaamp or MySQL Workbench.
-Importing the sql file into XAAMP works certainly, MySQL Workbench may not work based on the version used.
-
 Run your choice of MySQL client and make sure the connection is up.
+Create a database called 'Tutor'.
+Import tutor.sql into a mysql client like XAAMP or MySQL Workbench.
+Importing the sql file into XAAMP works certainly, MySQL Workbench may not work based on the version used.
+If using xaamp, there is a pdf 'setup_xaamp.pdf' that shows a simple walkthrough to importing the database file.
 
 Run 'npm run start' to start the application.
 
 Go to http://localhost:5000/ in the browser and the site should appear.
+
 
 
 Directories:
