@@ -26,3 +26,6 @@ Views is where all the pages live. Handlebars (hbs) is just templated HTML.
   Partials is small hbs files that can be used by other hbs files.
   
 tutor.sql contains all the mysql tables and rows.
+
+
+Current version will have different frontend than demo. We added some customizations to make it look more sleek.
