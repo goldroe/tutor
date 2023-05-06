@@ -5,7 +5,7 @@ var bcrypt = require('bcrypt');
 
 var storage = multer.diskStorage({  
     destination: function (req, file, callback) {  
-        callback(null, './public/images');  // maybe change path
+        callback(null, 'public/images');  // maybe change path
     },  
     filename: function (req, file, callback) {  
         callback(null, file.originalname);  
@@ -52,7 +52,7 @@ router.post('/student', (req, res) => {
         bcrypt.hash(req.body.pass, 10, function(err, hash) {
             if (err) throw err;
             connection.query(`INSERT INTO account (first_name, last_name, email, password, avatar, account_type, about_me) 
-            VALUES ('${req.body.first_name}', '${req.body.last_name}', '${req.body.email}', '${hash}', '${req.body.avatar}', 'student', '${req.body.about_me}')`, (err, result, fields) => {
+            VALUES ('${req.body.first_name}', '${req.body.last_name}', '${req.body.email}', '${hash}', '${req.file.filename}', 'student', '${req.body.about_me}')`, (err, result, fields) => {
                 if (err) throw err;
                 res.redirect('/login');
             });
@@ -68,15 +68,14 @@ router.get('/tutor', (req, res) => {
 
 router.post('/tutor', (req, res) => {
     console.log(req.body);
-    let subject_list = req.body.subject_list.split(',');
-    
     upload(req, res, function(err) {
         if (err) throw err;
         bcrypt.hash(req.body.pass, 10, function(err, hash) {
             if (err) throw err;
+            let subject_list = req.body.subject_list.split(',');
 
             connection.query(`INSERT INTO account (first_name, last_name, email, password, avatar, account_type, about_me) 
-            VALUES ('${req.body.first_name}', '${req.body.last_name}', '${req.body.email}', '${hash}', '${req.body.avatar}',   'tutor', '${req.body.about_me}')`, (err, result, fields) => {
+            VALUES ('${req.body.first_name}', '${req.body.last_name}', '${req.body.email}', '${hash}', '${req.file.filename}',   'tutor', '${req.body.about_me}')`, (err, result, fields) => {
                 if (err) throw err;
 
                 let account_id = result.insertId;
