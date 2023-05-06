@@ -22,7 +22,7 @@ function convertMilitaryToStandard (time) {
 router.get('/', (req, res) => {
     const account = req.session.account;
     connection.query(`SELECT subject.*, account.account_id, account.first_name, account.last_name, account.email, account.avatar FROM subject INNER JOIN subject_list ON subject_list.subject_id = subject.subject_id INNER JOIN account ON account.account_id = subject_list.account_id`, (err, rows) => {
-        if (err) throw err;
+        if (err) console.log(err);
         const courses = rows;
         res.render('courses', {account: account, courses: courses});
     });
@@ -35,7 +35,7 @@ router.post('/', (req, res) => {
 
     connection.query(`SELECT window_start, window_end FROM availabilities
     WHERE account_id=${req.body.tutor_id}`, (err, rows) => {
-        if (err) throw err;
+        if (err) console.log(err);
         var start_split = rows[0].window_start.split(":");
         var end_split = rows[0].window_end.split(":");
         let window_start = start_split.slice(0, -1).join(':');

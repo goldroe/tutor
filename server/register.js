@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
 //     console.log(req.body);
     
 //     upload(req, res, function(err) {
-//         if (err) throw err;
+//         if (err) console.log(err);
         
 //         console.log(req.body);
 //         var account_type;
@@ -34,7 +34,7 @@ router.get('/', (req, res) => {
         
 //         connection.query(`INSERT INTO account (first_name, last_name, email, password, profile_picture, account_type) 
 //         VALUES ('${req.body.first_name}', '${req.body.last_name}', '${req.body.email}', '${req.body.pass}', '${req.body.avatar}', '${account_type}')`, (err, rows) => {
-//             if (err) throw err;
+//             if (err) console.log(err);
             
 //             res.render('login');
 //         });
@@ -46,14 +46,13 @@ router.get('/student', (req, res) => {
 });
 
 router.post('/student', (req, res) => {
-    console.log(req.body);
     upload(req, res, function(err) {
-        if (err) throw err;
+        if (err) console.log(err);
         bcrypt.hash(req.body.pass, 10, function(err, hash) {
-            if (err) throw err;
+            if (err) console.log(err);
             connection.query(`INSERT INTO account (first_name, last_name, email, password, avatar, account_type, about_me) 
             VALUES ('${req.body.first_name}', '${req.body.last_name}', '${req.body.email}', '${hash}', '${req.file.filename}', 'student', '${req.body.about_me}')`, (err, result, fields) => {
-                if (err) throw err;
+                if (err) console.log(err);
                 res.redirect('/login');
             });
         });
@@ -67,16 +66,15 @@ router.get('/tutor', (req, res) => {
 });
 
 router.post('/tutor', (req, res) => {
-    console.log(req.body);
     upload(req, res, function(err) {
-        if (err) throw err;
+        if (err) console.log(err);
         bcrypt.hash(req.body.pass, 10, function(err, hash) {
-            if (err) throw err;
+            if (err) console.log(err);
             let subject_list = req.body.subject_list.split(',');
 
             connection.query(`INSERT INTO account (first_name, last_name, email, password, avatar, account_type, about_me) 
             VALUES ('${req.body.first_name}', '${req.body.last_name}', '${req.body.email}', '${hash}', '${req.file.filename}',   'tutor', '${req.body.about_me}')`, (err, result, fields) => {
-                if (err) throw err;
+                if (err) console.log(err);
 
                 let account_id = result.insertId;
 
@@ -90,7 +88,7 @@ router.post('/tutor', (req, res) => {
 
                 connection.query(`${sql}; INSERT INTO availabilities (account_id, window_start, window_end)
                 VALUES (${account_id}, '${req.body.window_start}', '${req.body.window_end}')`, (err, result, fields) => {
-                    if (err) throw err;
+                    if (err) console.log(err);
                     res.redirect('/login');
                 });
             });

@@ -36,7 +36,7 @@ router.get('/', (req, res) => {
     }
 
     connection.query(sql, (err, rows) => {
-        if (err) throw err;
+        if (err) console.log(err);
         // convert to standard (not military time)
         rows.forEach(function (element, index) {
             var start_split = rows[index].time_begin.split(":");
@@ -57,14 +57,13 @@ router.get('/', (req, res) => {
 
 
 router.post('/book', (req, res) => {
-    console.log(req.body);
     const time_begin = req.body.time_begin;
     const time_end = req.body.time_end;
     const date = req.body.appointment_date;
 
     connection.query(`SELECT window_start, window_end FROM availabilities
     WHERE account_id = ${req.body.tutor_id}`, (err, rows) => {
-        if (err) throw err;
+        if (err) console.log(err);
         var window = rows[0];
         let start = time_begin + ":00";
         let end = time_end + ":00";
@@ -74,7 +73,7 @@ router.post('/book', (req, res) => {
             var date_conflict = false;
             connection.query(`SELECT TIME(time_begin) AS time_begin, TIME(time_end) AS time_end FROM appointment
             WHERE tutor_id = ${req.body.tutor_id} AND DATE(time_begin)='${date}'`, (err, rows) => {
-                if (err) throw err;
+                if (err) console.log(err);
                 for (let i = 0; i < rows.length; i++) {
                     let appointment_begin = rows[i].time_begin;
                     let appointment_end = rows[i].time_end;
@@ -91,9 +90,9 @@ router.post('/book', (req, res) => {
                     duration = duration / 60 / 1000; // divides by milliseconds per minute
                     connection.query(`INSERT INTO appointment (subject_id, student_id, tutor_id, time_begin, time_end)
                     VALUES (${req.body.subject_id}, ${req.session.account.account_id}, ${req.body.tutor_id}, '${date_begin}', '${date_end}');`, (err, result, fields) => {
-                        if (err) throw err;
+                        if (err) console.log(err);
                         connection.query(`UPDATE account SET tutoring_minutes = tutoring_minutes + ${duration} WHERE account_id = ${req.body.tutor_id} OR account_id = ${req.session.account.account_id};`, (err, result, fields) => {
-                            if (err) throw err;
+                            if (err) console.log(err);
                             res.redirect('/appointments');
                         });
                     });

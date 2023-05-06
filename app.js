@@ -54,7 +54,7 @@ app.get('/login', (req, res) => {
 
 app.post('/login', upload.none(), (req, res) => {
     connection.query(`SELECT account_id, first_name, last_name, account_type, avatar, email, password FROM account WHERE email='${req.body.email}';`, (err, rows) => {
-        if (err) throw err;
+        if (err) console.log(err);
         var account = rows[0];
         if (account && account.password) {
             bcrypt.compare(req.body.pass, account.password, function(err, result) {
@@ -72,13 +72,11 @@ app.post('/login', upload.none(), (req, res) => {
 });
 
 app.get('/logout', (req, res) => {
-    console.log('logging out');
     delete req.session.account;
     res.redirect('/');
 });
 
 app.get('/about', (req, res) => {
-    console.log('sent to about');
     res.render('about', {account: req.session.account});
 });
 

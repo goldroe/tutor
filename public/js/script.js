@@ -61,7 +61,6 @@ window.onscroll = () =>{
 }
 
 function search_tutors() {
-    console.log('search_tutors');
     let input = document.getElementById('tutor_searchbar');
     let filter = input.value.toUpperCase();
     let tutors = document.getElementsByClassName('box');
@@ -105,15 +104,12 @@ function make_subject_list() {
     }) 
     
     subjects = subjects.replace(/,\s*$/, ""); // remove trailing comma
-    console.log(subjects);
     
     document.getElementById('subject_list').value = subjects;
-    console.log(document.getElementById('subject_list').value);
 }
 
 
 function check_form(form) {
-    console.log('check_form');
     if (form.pass.value != "" && form.pass.value == form.c_pass.value) {
         if (form.pass.value.length < 6) {
             alert("Error: Password must contain at least six characters!");
